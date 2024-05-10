@@ -14,7 +14,9 @@
                     <h5 class="text-primary">Welcome Back !</h5>
                     <p class="text-muted">Sign in to continue.</p>
                 </div>
-               
+                <div class="text-left mt-2">
+                @include('layouts.notif')
+                </div>
                 <div class="p-2 mt-4">
                     <form action="{{ route('login') }}" method="post">
                         @csrf

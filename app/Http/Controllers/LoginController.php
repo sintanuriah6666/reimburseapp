@@ -13,9 +13,9 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
          
-            return redirect()->intended('/home');
+            return redirect()->intended('/home')->with('success', 'Login success, welcome to the dashboard!');
         }
-        return back()->withErrors(['nip' => 'Invalid NIP or password']); 
+        return back()->with('error', 'Login failed, please check your NIP and password');
     }
 
     public function logout(Request $request)
