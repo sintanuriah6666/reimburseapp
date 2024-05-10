@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+
 class UserController extends Controller
 {
     /**
@@ -29,20 +30,21 @@ class UserController extends Controller
             'nip' => 'required',
         ]);
 
+        if (User::where('email', $request->email)->exists()) {
+            return redirect()->route('user.index')->with('error', 'Email already exists.');
+        }
+       
+        if (User::where('nip', $request->nip)->exists()) {
+            return redirect()->route('user.index')->with('error', 'NIP already exists.');
+        }
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->jabatan = $request->jabatan;
         $user->nip = $request->nip;
-
-
-        if (User::where('id', $user->id)->exists()) {
-            $user->id = generate_unique_id();
-        }
-
         $user->save();
-
         return redirect()->route('user.index')->with('success', 'User created successfully.');
     }
 

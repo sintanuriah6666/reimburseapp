@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'id' => 1, 
                 'nip' => '1234',
                 'name' => 'DONI',
                 'jabatan' => 'direktur',
@@ -25,7 +24,6 @@ class UsersTableSeeder extends Seeder
                
             ],
             [
-                'id' => 2, 
                 'nip' => '1235',
                 'name' => 'DONO',
                 'jabatan' => 'finance',
@@ -35,7 +33,6 @@ class UsersTableSeeder extends Seeder
                
             ],
             [
-                'id' => 3,
                 'nip' => '1236',
                 'name' => 'DONA',
                 'jabatan' => 'staff',
