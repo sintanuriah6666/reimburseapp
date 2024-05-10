@@ -38,7 +38,7 @@
                             <thead class="table-light">
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Karyawan</th>
+                                    <th>Staff</th>
                                     <th>Tanggal</th>
                                     <th>Nama Reimbursement</th>
                                     <th>File Pendukung</th>
@@ -61,7 +61,7 @@
                                         @endif
                                     </td>
                                     @if($reimbursement->status == 'pending')
-                                        <td><span class="badge bg-warning">Waiting approve directur</span></td>
+                                        <td><span class="badge bg-warning">Waiting approve director</span></td>
                                     @elseif($reimbursement->status == 'rejected')
                                         <td><span class="badge bg-danger">Rejected</span></td>
                                     @elseif($reimbursement->status == 'confirmed')
@@ -74,11 +74,11 @@
                                         <div class="d-flex gap-2">
                                             @if(auth()->user()->jabatan === 'staff')
                                                 @if($reimbursement->status == 'pending')
-                                                <div class="delete">
-                                                    <form action="{{ route('reimbursement.destroy', ['id' => $reimbursement->id]) }}" method="post">
+                                                <div class="remove">
+                                                    <form action="{{ route('reimbursement.destroy', ['reimbursement' => $reimbursement->id]) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                                        <button type="submit" class="btn btn-sm btn-danger remove-item-btn">Remove</button>
                                                     </form>
                                                 </div>
                                                 @else 

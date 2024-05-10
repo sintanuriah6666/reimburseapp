@@ -31,19 +31,19 @@
                         </div>
                     </div>
                     <div class="table-responsive table-card mt-3 mb-1">
-                        <table class="table align-middle table-nowrap" id="customerTable">
+                        <table class="table">
                             <thead class="table-light">
                                 <tr>
-                                    <th class="sort" data-sort="customer_name">No</th>
-                                    <th class="sort" data-sort="customer_name">Customer</th>
-                                    <th class="sort" data-sort="email">Email</th>
-                                    <th class="sort" data-sort="phone">NIP</th>
-                                    <th class="sort" data-sort="jabatan">Jabatan</th>
-                                    <th class="sort" data-sort="date">Akun dibuat</th>
-                                    <th class="sort" data-sort="action">Action</th>
+                                    <th>No</th>
+                                    <th>Customer</th>
+                                    <th>Email</th>
+                                    <th>NIP</th>
+                                    <th>Jabatan</th>
+                                    <th>Akun dibuat</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody class="list form-check-all">
+                            <tbody>
                                 @foreach($users as $key => $user)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>

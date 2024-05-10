@@ -24,7 +24,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-center">Halo, selamat datang {{ Auth::user()->jabatan }}<i class="ri-user-heart-line"></i></h3>
+                <h3 class="text-center">Halo, selamat datang {{ Auth::user()->name }} <i class="ri-user-heart-line"></i></h3>
+                <p class="text-center">Selamat bertugas sebagai {{ Auth::user()->jabatan }}</p>
+
                 </div>
                 <div class="card-body">
                     <div class="text-center">

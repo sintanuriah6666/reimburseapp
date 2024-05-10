@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -17,34 +18,34 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
+
     public function create(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
             'jabatan' => 'required',
             'nip' => 'required',
         ]);
 
-        
-        $validatedData['password'] = bcrypt($request->password);
-        
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $validatedData['password'];
+        $user->password = Hash::make($request->password);
         $user->jabatan = $request->jabatan;
         $user->nip = $request->nip;
+
+
+        if (User::where('id', $user->id)->exists()) {
+            $user->id = generate_unique_id();
+        }
+
         $user->save();
 
-        if($user->save() == false){
-            return redirect()->back()->with('error', 'Failed to create user.');
-
-        } else {
-            return redirect()->back()->with('success', 'User created successfully.');
-        }
+        return redirect()->route('user.index')->with('success', 'User created successfully.');
     }
+
     
     public function store()
     {
@@ -57,28 +58,33 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user)
+
+
+    public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            'email' => 'required|email',
             'jabatan' => 'required',
             'nip' => 'required',
         ]);
 
-        
-        $validatedData['password'] = bcrypt($request->password);
-        
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $validatedData['password'];
-        $user->jabatan = $request->jabatan;
-        $user->nip = $request->nip;
-        $user->update();
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'jabatan' => $request->jabatan,
+            'nip' => $request->nip,
+        ];
 
-        return redirect()->back()->with('success', 'User updated successfully.');
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
+
+        return redirect()->route('user.index')->with('success', 'User updated successfully');
     }
 
     public function destroy(User $user)

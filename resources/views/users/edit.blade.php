@@ -2,11 +2,6 @@
 
 @section('title', __('Users'))
 
-@section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('user.index') }}">{{ __('Users') }}</a></li>
-    <li class="breadcrumb-item active">{{ __('Detail') }}</li>
-@endsection
-
 @section('content')
 <div class="card">
     <div class="card-header">
@@ -18,7 +13,6 @@
 
     <div class="card-body">
     <form action="{{ route('user.update', ['id' => $user->id]) }}" method="post" autocomplete="off">
-
             @csrf
             <div class="mb-3">
                 <label for="name-field" class="form-label">Name</label>
@@ -41,10 +35,9 @@
                 </select>
                 <div class="invalid-feedback">Please select a jabatan.</div>
             </div>
-
             <div class="mb-3">
                 <label for="password-field" class="form-label">Password</label>
-                <input type="password" id="password-field" name="password" class="form-control" placeholder="Enter Password" required />
+                <input type="password" id="password-field" name="password" class="form-control" placeholder="Enter Password"  />
                 <div class="invalid-feedback">Please enter a password.</div>
             </div>
 

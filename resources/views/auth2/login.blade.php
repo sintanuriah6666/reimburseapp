@@ -7,10 +7,14 @@
     <div class="col-md-8 col-lg-6 col-xl-5">
         <div class="card mt-4">
             <div class="card-body p-4">
+                <div class="text-center">
+                    <img src="{{ asset('storage/default/images/reimburs-logo.png') }}" alt="Logo" height="150">
+                </div>
                 <div class="text-center mt-2">
                     <h5 class="text-primary">Welcome Back !</h5>
                     <p class="text-muted">Sign in to continue.</p>
                 </div>
+               
                 <div class="p-2 mt-4">
                     <form action="{{ route('login') }}" method="post">
                         @csrf

@@ -83,4 +83,14 @@ class ReimbursementsController extends Controller
         return redirect()->route('reimbursement.index');
     }
 
+
+    public function destroy(Reimbursement $reimbursement)
+    {
+        try {
+            $reimbursement->delete();
+            return redirect()->route('reimbursement.index')->with('success', 'Reimbursement deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('reimbursement.index')->with('error', 'Failed to delete Reimbursement.');
+        }
+    }
 }
