@@ -32,9 +32,17 @@
         <div class="mb-3">
             <label for="created_at" class="form-label">Status saat ini</label>
             <input type="text" class="form-control" id="created_at" name="created_at" value="{{ $reimbursement->status }}" readonly>
-            
         </div>
-
+        <div class="mb-3">
+            <label for="file_pendukung" class="form-label">File Pendukung</label>
+            <div>
+                @if($reimbursement->file_pendukung)
+                    <a href="{{ asset('storage/'. $reimbursement->file_pendukung) }}" target="_blank" class="btn btn-sm btn-primary"><i class="ri-file-2-line"></i> Lihat File</a>
+                @else
+                    <span class="badge bg-danger">No File</span>
+                @endif
+            </div>
+        </div>
         <div class="mb-3">
         @if(auth()->user()->jabatan == 'direktur')
         @if($reimbursement->status == 'pending')
